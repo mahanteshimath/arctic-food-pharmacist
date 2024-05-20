@@ -6,7 +6,7 @@ from transformers import AutoTokenizer
 # App title
 st.title("ArcticHealth: Ingredient Safety Checker")
 
-st.set_page_config(page_title="ARCTIC-FOOD-PHARMACIST")
+# st.set_page_config(page_title="ARCTIC-FOOD-PHARMACIST")
 
 def main():
     """Execution starts here."""
