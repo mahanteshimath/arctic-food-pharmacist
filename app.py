@@ -56,11 +56,11 @@ def get_tokenizer():
     """Get a tokenizer to make sure we're not sending too much text
     text to the Model. Eventually we will replace this with ArcticTokenizer
     """
-    return AutoTokenizer.from_pretrained("huggyllama/llama-7b")
+    return AutoTokenizer.from_pretrained("snowflake/snowflake-arctic-instruct")
 
 @st.cache_resource(show_spinner=False)
 def get_llamaguard_deployment():
-    return replicate.deployments.get("snowflake/llamaguard")
+    return replicate.deployments.get( "snowflake/snowflake-arctic-instruct")
 
 def check_safety(disable=False) -> bool: 
     if disable:
