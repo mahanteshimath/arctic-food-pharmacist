@@ -94,19 +94,7 @@ def generate_arctic_response():
         yield str(event)
 
 
-uploaded_file = st.file_uploader("Upload a PDF, TXT, or Image file containing food package contents", type=["pdf", "txt", "png", "jpg", "jpeg"])
 
-if uploaded_file:
-    if uploaded_file.type == "application/pdf":
-        prompt = extract_text_from_pdf(uploaded_file)
-    elif uploaded_file.type == "text/plain":
-        prompt = str(uploaded_file.read(), "utf-8")
-    elif uploaded_file.type in ["image/png", "image/jpeg", "image/jpg"]:
-        prompt = extract_text_from_image(uploaded_file)
-    
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user", avatar="human"):
-        st.write(prompt)
 
 # User-provided prompt
 if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type your food package contents"):
@@ -122,5 +110,19 @@ if st.session_state.messages[-1]["role"] != "assistant":
     message = {"role": "assistant", "content": full_response}
     st.session_state.messages.append(message)
 
-st.button('Clear', on_click=clear_chat_history)    
+st.button('Clear', on_click=clear_chat_history)
+
+uploaded_file = st.file_uploader("Upload a PDF, TXT, or Image file containing food package contents", type=["pdf", "txt", "png", "jpg", "jpeg"])
+
+if uploaded_file:
+    if uploaded_file.type == "application/pdf":
+        prompt = extract_text_from_pdf(uploaded_file)
+    elif uploaded_file.type == "text/plain":
+        prompt = str(uploaded_file.read(), "utf-8")
+    elif uploaded_file.type in ["image/png", "image/jpeg", "image/jpg"]:
+        prompt = extract_text_from_image(uploaded_file)
+    
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user", avatar="human"):
+        st.write(prompt)
 
