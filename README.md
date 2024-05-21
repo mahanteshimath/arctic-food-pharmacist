@@ -2,14 +2,14 @@
 App with you can check food contents of the packaging, identifying if any are hazardous to health or banned in any country.
 Chat futer on the same topic.
 
-
+Application [Link ] (https://arctic-food-pharmacist.streamlit.app/)
 ![Application Flow](src/arctic-food-pharmacist.jpg)
 
 ## 💡 Inspiration
 
 The inspiration for this project came from the increasing need for better food safety and regulation compliance. With globalization, food products are crossing borders more frequently, making it essential to ensure that food contents comply with health regulations in various countries. This project aims to leverage AI to assist food inspectors by providing an intelligent tool that can analyze food packaging contents, identify hazardous ingredients, and determine if any contents are banned in specific countries.
 
-## 🎮 What it does
+## 🎮 What it does 📊 Features:
 
 The Snowflake arctic-food-pharmacist Chatbot is a Streamlit-based web application that allows users to interact with an AI-powered chatbot designed to read and understand food packaging contents. The key features include:
 
