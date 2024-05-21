@@ -14,7 +14,7 @@ st.set_page_config(page_title="arctic-food-pharmacist")
 # Replicate Credentials
 with st.sidebar:
     if 'REPLICATE_API_TOKEN' in st.secrets:
-        replicate_api = st.secrets.replicate_k
+        replicate_api = st.secrets["replicate_k"]
         st.write(replicate_api)
     else:
         replicate_api = st.text_input('Enter Replicate API token:', type='password')
