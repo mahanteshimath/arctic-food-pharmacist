@@ -27,8 +27,9 @@ with st.sidebar:
     temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01)
     top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
     st.markdown("[![Foo](https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Linkedin_unofficial_colored_svg-48.png)](https://www.linkedin.com/in/mahantesh-hiremath/) Connect me.")   
+    st.markdown('<p style="color: yellow;">👉🎥 Visit my YouTube channel for more details <a href="https://bit.ly/atozaboutdata">🎥click</a></p>', unsafe_allow_html=True)
     st.markdown("**Arctic Food Pharmacist**: Your AI Food Inspector: Ensuring Safe and Informed Eating Introducing Arctic Food Pharmacist, an intelligent food inspector app designed to safeguard your health by analyzing food packaging contents for hazardous and banned ingredients. Simply upload your food labels, and our AI-powered system will inform you about any potential health risks or regulatory issues across different countries.")
-
+    
 # Store LLM-generated responses
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", 
