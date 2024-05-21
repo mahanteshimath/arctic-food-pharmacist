@@ -37,6 +37,7 @@ for message in st.session_state.messages:
 
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
+    st.experimental_rerun()
 
 
 
@@ -82,7 +83,7 @@ def generate_arctic_response():
     
     if get_num_tokens(prompt_str) >= 3072:
         st.error("Conversation length too long. Please keep it under 3072 tokens.")
-        st.button('Clear chat history', on_click=clear_chat_history, key="clear_chat_history")
+        st.button('Clear chat', on_click=clear_chat_history, key="clear_chat_history")
         st.stop()
 
     for event in replicate.stream("snowflake/snowflake-arctic-instruct",
