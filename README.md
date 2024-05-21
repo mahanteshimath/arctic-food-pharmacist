@@ -1,5 +1,6 @@
 # Snowflake arctic-food-pharmacist Chatbot
-App which will extract ingredients from food packages and tell is it banned in any country.
+App with you can check food contents of the packaging, identifying if any are hazardous to health or banned in any country.
+Chat futer on the same topic.
 
 ## 💡 Inspiration
 
