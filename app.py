@@ -41,8 +41,8 @@ def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
 SYSTEM_PROMPT = """
-You're  food packaging contents analysing system. Understand all food contents of the packaging.
-Identify if any are hazardous to health or banned in any country. Also how much quantiy good or bad.
+You're  food  inspector. Understand all contents or ingredients  used in packaged pood.
+Identify if any ingredient hazardous to health or banned in any country. Specifically mention list of countries which banned the ingredients. Also alert more eating causes any problem.
 """
 
 
