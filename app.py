@@ -89,5 +89,8 @@ if st.session_state.messages[-1]["role"] != "assistant":
         full_response = st.write_stream(response)
     message = {"role": "assistant", "content": full_response}
     st.session_state.messages.append(message)
-st.button('Clear chat', on_click=clear_chat_history)
+# Layout with the "Clear chat" button on the right
+col1, col2 = st.columns([9, 1])
+with col2:
+    st.button('Clear chat', on_click=clear_chat_history)    
 
