@@ -1,7 +1,5 @@
-# arctic-food-pharmacist
+# Snowflake arctic-food-pharmacist Chatbot
 App which will extract ingredients from food packages and tell is it banned in any country.
-
-# Snowflake Arctic Food Inspector Chatbot
 
 ## 💡 Inspiration
 
@@ -9,7 +7,7 @@ The inspiration for this project came from the increasing need for better food s
 
 ## 🎮 What it does
 
-The Snowflake Arctic Food Inspector Chatbot is a Streamlit-based web application that allows users to interact with an AI-powered chatbot designed to read and understand food packaging contents. The key features include:
+The Snowflake arctic-food-pharmacist Chatbot is a Streamlit-based web application that allows users to interact with an AI-powered chatbot designed to read and understand food packaging contents. The key features include:
 
 - **Chat Interaction**: Users can ask the chatbot about food contents and get informed responses regarding their safety and legality.
 - **File Upload**: Users can upload PDF, TXT, or image files containing food packaging contents. The chatbot will extract and analyze the text.
@@ -19,7 +17,7 @@ The Snowflake Arctic Food Inspector Chatbot is a Streamlit-based web application
 
 ## ⚙️ How I built it
 
-The Snowflake Arctic Food Inspector Chatbot was built using the following steps:
+The Snowflake arctic-food-pharmacist Chatbot was built using the following steps:
 
 1. **Setting Up Streamlit**: Streamlit was chosen for its simplicity and ease of use in building interactive web applications.
 2. **Integrating Replicate API**: The Replicate API was used to interact with the Snowflake Arctic model, enabling the chatbot functionality.
@@ -46,8 +44,8 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/snowflake-arctic-food-inspector.git
-    cd snowflake-arctic-food-inspector
+    git clone https://github.com/yourusername/snowflake-arctic-food-pharmacist.git
+    cd snowflake-arctic-food-pharmacist
     ```
 
 2. **Install the required packages**:
@@ -72,5 +70,4 @@ To run this project locally, follow these steps:
 
 ## Conclusion
 
-The Snowflake Arctic Food Inspector Chatbot is an innovative tool designed to assist in ensuring food safety and compliance with international regulations. By leveraging AI, the application provides a powerful and user-friendly solution for analyzing food packaging contents. This project not only demonstrates the potential of AI in regulatory applications but also highlights the simplicity and effectiveness of using Streamlit for building interactive web applications.
-
+The Snowflake arctic-food-pharmacist Chatbot is an innovative tool designed to assist in ensuring food safety and compliance with international regulations. By leveraging AI, the application provides a powerful and user-friendly solution for analyzing food packaging contents. This project not only demonstrates the potential of AI in regulatory applications but also highlights the simplicity and effectiveness of using Streamlit for building interactive web applications.
