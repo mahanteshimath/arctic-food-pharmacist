@@ -84,7 +84,7 @@ def generate_arctic_response():
             prompt.append("assistant\n" + dict_message["content"] + "")
     
     prompt.append("assistant")
-    prompt.append("SYSTEM_PROMPT")
+    prompt.append(" ")
     prompt_str = "\n".join(prompt)
     
     if get_num_tokens(prompt_str) >= 3072:
