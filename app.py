@@ -9,7 +9,7 @@ import pytesseract
 icons = {"assistant": "🤖", "user": "human"}
 
 # App title
-st.set_page_config(page_title="Snowflake Arctic")
+st.set_page_config(page_title="arctic-food-pharmacist")
 
 # Replicate Credentials
 with st.sidebar:
@@ -71,7 +71,7 @@ def extract_text_from_pdf(file):
 def extract_text_from_image(file):
     """Extract text from an image file"""
     image = Image.open(file)
-    text = pytesseract.image_to_data(image)
+    text = pytesseract.image_to_string(image)
     return text
 
 # Function for generating Snowflake Arctic response
@@ -84,7 +84,7 @@ def generate_arctic_response():
             prompt.append("assistant\n" + dict_message["content"] + "")
     
     prompt.append("assistant")
-    prompt.append("{SYSTEM_PROMPT}")
+    prompt.append("SYSTEM_PROMPT")
     prompt_str = "\n".join(prompt)
     
     if get_num_tokens(prompt_str) >= 3072:
