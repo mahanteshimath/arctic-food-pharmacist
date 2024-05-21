@@ -1,3 +1,6 @@
 streamlit
 replicate
 transformers
+pytesseract
+pillow
+pdfplumber
