@@ -1,6 +1,7 @@
 # Snowflake arctic-food-pharmacist Chatbot
-App with you can check food contents of the packaging, identifying if any are hazardous to health or banned in any country.
-Chat futer on the same topic.
+Arctic Food pharmacist : "Your AI Food Inspector: Ensuring Safe and Informed Eating"
+Introducing Arctic Food Pharmacist, an intelligent food inspector app designed to safeguard 
+your health by analyzing food packaging contents for hazardous and banned ingredients. Simply upload your food labels, and our AI-powered system will inform you about any potential health risks or regulatory issues across different countries.
 
 Application [Link ] (https://arctic-food-pharmacist.streamlit.app/)
 ![Application Flow](src/arctic-food-pharmacist.jpg)
