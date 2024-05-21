@@ -44,8 +44,8 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/snowflake-arctic-food-pharmacist.git
-    cd snowflake-arctic-food-pharmacist
+    git clone https://github.com/mahanteshimath/arctic-food-pharmacist.git
+    cd arctic-food-pharmacist
     ```
 
 2. **Install the required packages**:
