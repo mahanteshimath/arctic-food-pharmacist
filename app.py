@@ -3,14 +3,13 @@ import replicate
 import os
 from transformers import AutoTokenizer
 
-icons = {"assistant": "🤖", "user": "⛷️"}
+icons = {"assistant": "🤖", "user": "human"}
 
 # App title
 st.set_page_config(page_title="Snowflake Arctic")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title('Snowflake Arctic')
     if 'REPLICATE_API_TOKEN' in st.secrets:
         replicate_api = st.secrets['REPLICATE_API_TOKEN']
     else:
@@ -81,7 +80,7 @@ def generate_arctic_response():
 # User-provided prompt
 if prompt := st.chat_input(disabled=not replicate_api):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user", avatar="⛷️"):
+    with st.chat_message("user", avatar="human"):
         st.write(prompt)
 
 # Generate a new response if last message is not from assistant
