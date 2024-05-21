@@ -25,7 +25,7 @@ with st.sidebar:
 
 # Store LLM-generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Hi. I'm Arctic, a new, efficient, intelligent, and truly open language model created by Snowflake AI Research. Ask me anything."}]
+    st.session_state.messages = [{"role": "Food content inspector", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
 # Display or clear chat messages
 for message in st.session_state.messages:
@@ -33,9 +33,9 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "Hi. I'm Arctic, a new, efficient, intelligent, and truly open language model created by Snowflake AI Research. Ask me anything."}]
+    st.session_state.messages = [{"role": "Food content inspector", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
-st.sidebar.button('Clear chat history', on_click=clear_chat_history)
+st.button('Clear chat', on_click=clear_chat_history)
 
 
 @st.cache_resource(show_spinner=False)
@@ -78,7 +78,7 @@ def generate_arctic_response():
         yield str(event)
 
 # User-provided prompt
-if prompt := st.chat_input(disabled=not replicate_api, placeholder="As a food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."):
+if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type your food package contents"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar="human"):
         st.write(prompt)
