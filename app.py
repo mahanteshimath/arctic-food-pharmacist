@@ -79,7 +79,7 @@ def generate_arctic_response():
     prompt = []
     for dict_message in st.session_state.messages:
         if dict_message["role"] == "user":
-            prompt.append("user\n" + SYSTEM_PROMPT +dict_message["content"] + "")
+            prompt.append("user\n" + SYSTEM_PROMPT + dict_message["content"] + "")
         else:
             prompt.append("assistant\n" + dict_message["content"] + "")
     
