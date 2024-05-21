@@ -71,7 +71,7 @@ def extract_text_from_pdf(file):
 def extract_text_from_image(file):
     """Extract text from an image file"""
     image = Image.open(file)
-    text = pytesseract.image_to_string(image)
+    text = pytesseract.image_to_data(image)
     return text
 
 # Function for generating Snowflake Arctic response
