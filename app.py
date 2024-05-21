@@ -84,13 +84,15 @@ with col1:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user", avatar="human"):
             st.write(prompt)
+
+    # Generate a new response if last message is not from assistant
+    if st.session_state.messages[-1]["role"] != "assistant":
+        with st.chat_message("assistant", avatar="🤖"):
+            response = generate_arctic_response()
+            full_response = st.write_stream(response)
+        message = {"role": "assistant", "content": full_response}
+        st.session_state.messages.append(message)
 with col2:
     st.button('Clear chat', on_click=clear_chat_history)
 
-# Generate a new response if last message is not from assistant
-if st.session_state.messages[-1]["role"] != "assistant":
-    with st.chat_message("assistant", avatar="🤖"):
-        response = generate_arctic_response()
-        full_response = st.write_stream(response)
-    message = {"role": "assistant", "content": full_response}
-    st.session_state.messages.append(message)
+
