@@ -3,8 +3,7 @@ import replicate
 import os
 from transformers import AutoTokenizer
 
-# Set assistant icon to Snowflake logo
-icons = {"assistant": "./sf.svg", "user": "⛷️"}
+icons = {"assistant": "🤖", "user": "⛷️"}
 
 # App title
 st.set_page_config(page_title="Snowflake Arctic")
@@ -37,7 +36,7 @@ for message in st.session_state.messages:
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi. I'm Arctic, a new, efficient, intelligent, and truly open language model created by Snowflake AI Research. Ask me anything."}]
 
-st.sidebar.button('Clear chat history', on_click=clear_chat_history)
+st.button('Clear chat history', on_click=clear_chat_history)
 
 
 @st.cache_resource(show_spinner=False)
@@ -87,7 +86,7 @@ if prompt := st.chat_input(disabled=not replicate_api):
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
-    with st.chat_message("assistant", avatar="./sf.svg"):
+    with st.chat_message("assistant", avatar="🤖"):
         response = generate_arctic_response()
         full_response = st.write_stream(response)
     message = {"role": "assistant", "content": full_response}
