@@ -37,7 +37,8 @@ for message in st.session_state.messages:
 
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
-    st.experimental_rerun()
+    st.session_state.uploaded_file = None
+
 
 
 
