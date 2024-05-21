@@ -12,22 +12,15 @@ icons = {"assistant": "🤖", "user": "human"}
 st.set_page_config(page_title="Food Inspector")
 
 # Replicate Credentials
-with st.sidebar:
-    if 'REPLICATE_API_TOKEN' in st.secrets:
-        replicate_api = st.secrets['REPLICATE_API_TOKEN']
-    else:
-        replicate_api = st.text_input('Enter Replicate API token:', type='password')
-        if not (replicate_api.startswith('r8_') and len(replicate_api)==40):
-            st.warning('Please enter your Replicate API token.', icon='⚠️')
-            st.markdown("**Don't have an API token?** Head over to [Replicate](https://replicate.com) to sign up for one.")
+if 'REPLICATE_API_TOKEN' in st.secrets:
+    replicate_api = st.secrets['REPLICATE_API_TOKEN']
+else:
+    replicate_api = st.text_input('Enter Replicate API token:', type='password')
+    if not (replicate_api.startswith('r8_') and len(replicate_api)==40):
+        st.warning('Please enter your Replicate API token.', icon='⚠️')
+        st.markdown("**Don't have an API token?** Head over to [Replicate](https://replicate.com) to sign up for one.")
 
-    os.environ['REPLICATE_API_TOKEN'] = replicate_api
-    st.subheader("Adjust model parameters")
-    temperature = st.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01)
-    top_p = st.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
-    
-    st.subheader("Upload PDF or Image")
-    uploaded_file = st.file_uploader("", type=["pdf", "png", "jpg", "jpeg"])
+os.environ['REPLICATE_API_TOKEN'] = replicate_api
 
 # Store LLM-generated responses
 if "messages" not in st.session_state.keys():
@@ -100,24 +93,20 @@ def generate_arctic_response():
         yield str(event)
 
 # User-provided prompt
-if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type here to ask about food contents"):
+prompt = st.text_input("Type here to ask about food contents", help="Enter your query here")
+if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.form(key="send_message_form"):
-        col1, col2 = st.columns([8, 1])
-        with col1:
-            st.write(prompt)
-        with col2:
-            st.form_submit_button(label="Send", help="Send your message")
 
-# Generate a new response if last message is not from assistant
-if st.session_state.messages[-1]["role"] != "assistant":
-    with st.chat_message("assistant", avatar="🤖"):
-        response = generate_arctic_response()
-        full_response = st.write_stream(response)
-    message = {"role": "assistant", "content": full_response}
-    st.session_state.messages.append(message)
+    # Generate a new response if last message is not from assistant
+    if st.session_state.messages[-1]["role"] != "assistant":
+        with st.chat_message("assistant", avatar="🤖"):
+            response = generate_arctic_response()
+            full_response = st.write_stream(response)
+        message = {"role": "assistant", "content": full_response}
+        st.session_state.messages.append(message)
 
 # File upload
+uploaded_file = st.file_uploader("Upload PDF or Image", type=["pdf", "png", "jpg", "jpeg"])
 if uploaded_file is not None:
     if uploaded_file.type == "application/pdf":
         text = extract_text_from_pdf(uploaded_file)
