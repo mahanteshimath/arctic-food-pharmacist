@@ -35,7 +35,6 @@ for message in st.session_state.messages:
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
-st.button('Clear chat', on_click=clear_chat_history)
 
 
 @st.cache_resource(show_spinner=False)
@@ -90,3 +89,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
         full_response = st.write_stream(response)
     message = {"role": "assistant", "content": full_response}
     st.session_state.messages.append(message)
+st.button('Clear chat', on_click=clear_chat_history)
+
