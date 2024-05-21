@@ -1,6 +1,7 @@
 streamlit
 replicate
 transformers
+pymupdf
 pytesseract
 pillow
 pdfplumber
