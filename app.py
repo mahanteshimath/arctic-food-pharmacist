@@ -37,7 +37,7 @@ for message in st.session_state.messages:
 
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
-    st.session_state.uploaded_file = None
+    st.rerun()
 
 
 
@@ -124,5 +124,5 @@ if st.session_state.messages[-1]["role"] != "assistant":
     message = {"role": "assistant", "content": full_response}
     st.session_state.messages.append(message)
 
-st.button('Clear', on_click=clear_chat_history)    
+st.button('Clear', on_click=clear_chat_history)
 
