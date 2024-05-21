@@ -23,12 +23,15 @@ with st.sidebar:
 
     os.environ['REPLICATE_API_TOKEN'] = replicate_api
     st.subheader("Adjust model parameters")
-    temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01)
-    top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
+    temperature = st.slider('temperature', min_value=0.01, max_value=5.0, value=0.3, step=0.01)
+    top_p = st.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
+    
+    st.subheader("Upload PDF or Image")
+    uploaded_file = st.file_uploader("", type=["pdf", "png", "jpg", "jpeg"])
 
 # Store LLM-generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "Hi. I'm Arctic, a new, efficient, intelligent, and truly open language model created by Snowflake AI Research. Ask me anything."}]
+    st.session_state.messages = [{"role": "assistant", "content": "As a food inspector, I will read and understand all food contents of packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
 # Display or clear chat messages
 for message in st.session_state.messages:
@@ -36,12 +39,9 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "Hi. I'm Arctic, a new, efficient, intelligent, and truly open language model created by Snowflake AI Research. Ask me anything."}]
+    st.session_state.messages = [{"role": "assistant", "content": "As a food inspector, I will read and understand all food contents of packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
-# Place the "Clear chat history" button beside the user input box
-clear_chat_col, input_col = st.columns([1, 4])
-with clear_chat_col:
-    st.button('Clear chat history', on_click=clear_chat_history, key="clear_chat_history")
+st.button('Clear chat history', on_click=clear_chat_history, help="Clears the chat history")
 
 @st.cache_resource(show_spinner=False)
 def get_tokenizer():
@@ -88,7 +88,7 @@ def generate_arctic_response():
     
     if get_num_tokens(prompt_str) >= 3072:
         st.error("Conversation length too long. Please keep it under 3072 tokens.")
-        st.button('Clear chat history', on_click=clear_chat_history, key="clear_chat_history_too_long")
+        st.button('Clear chat history', on_click=clear_chat_history, key="clear_chat_history")
         st.stop()
 
     for event in replicate.stream("snowflake/snowflake-arctic-instruct",
@@ -100,12 +100,14 @@ def generate_arctic_response():
         yield str(event)
 
 # User-provided prompt
-with input_col:
-    prompt = st.chat_input(disabled=not replicate_api)
-    if prompt:
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user", avatar="human"):
+if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type here to ask about food contents"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.form(key="send_message_form"):
+        col1, col2 = st.columns([8, 1])
+        with col1:
             st.write(prompt)
+        with col2:
+            st.form_submit_button(label="Send", help="Send your message")
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
@@ -116,7 +118,6 @@ if st.session_state.messages[-1]["role"] != "assistant":
     st.session_state.messages.append(message)
 
 # File upload
-uploaded_file = st.file_uploader("Upload PDF or Image", type=["pdf", "png", "jpg", "jpeg"])
 if uploaded_file is not None:
     if uploaded_file.type == "application/pdf":
         text = extract_text_from_pdf(uploaded_file)
