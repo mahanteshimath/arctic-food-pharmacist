@@ -35,7 +35,7 @@ for message in st.session_state.messages:
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "Hi I am food inspector, I will read and understand all food contents of the packaging, identifying if any are hazardous to health or banned in any country. Ask me anything."}]
 
-st.button('Clear chat', on_click=clear_chat_history)
+
 
 
 @st.cache_resource(show_spinner=False)
@@ -66,7 +66,7 @@ def generate_arctic_response():
     
     if get_num_tokens(prompt_str) >= 3072:
         st.error("Conversation length too long. Please keep it under 3072 tokens.")
-        st.button('Clear chat history', on_click=clear_chat_history, key="clear_chat_history")
+        st.button('Clear chat', on_click=clear_chat_history, key="clear_chat_history")
         st.stop()
 
     for event in replicate.stream("snowflake/snowflake-arctic-instruct",
@@ -78,10 +78,14 @@ def generate_arctic_response():
         yield str(event)
 
 # User-provided prompt
-if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type your food package contents"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user", avatar="human"):
-        st.write(prompt)
+col1, col2 = st.columns([0.9, 0.1], gap="small")
+with col1:
+    if prompt := st.chat_input(disabled=not replicate_api, placeholder="Type your food package contents"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user", avatar="human"):
+            st.write(prompt)
+with col2:
+    st.button('Clear chat', on_click=clear_chat_history)
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
